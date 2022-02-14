@@ -8,7 +8,7 @@ EXPOSE 8080
 
 ARG JAR_FILE=build/libs/*.jar
 
-COPY ${JAR_FILE} app.jar
+COPY ${JAR_FILE} /
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/gradle-springboot-test-0.0.1-SNAPSHOT.jar"]
 
