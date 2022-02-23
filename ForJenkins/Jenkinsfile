@@ -27,6 +27,7 @@ pipeline {
 
         stage('build gradle') {
             steps {
+                sh 'chmod +x gradlew'
                 sh  './gradlew build'
 
 
@@ -51,7 +52,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'docker run -d -p 8080:47788 --name mooh2jj/docker-jenkins-github-test'
+                sh 'docker run -d -p 8080:47788 mooh2jj/docker-jenkins-github-test'
             }
 
             post {
