@@ -8,6 +8,6 @@ public class TestController {
 
     @GetMapping("/test")
     public String test() {
-        return "jenkins_test";
+        return "jenkins_test_web_hook";
     }
 }
