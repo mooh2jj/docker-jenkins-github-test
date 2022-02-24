@@ -46,13 +46,14 @@ pipeline {
 
         stage('dockerizing'){
             steps{
-                sh 'docker build . -t mooh2jj/docker-jenkins-github-test'
+                sh 'docker build -t {container_name}:latest .'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'docker run -d -p 47788:47788 mooh2jj/docker-jenkins-github-test'
+//                 sh 'docker rmi -f mooh2jj/docker-jenkins-github-test'
+                sh 'docker run -d --name {container_name} -p 47788:47788 {container_name}:latest'
             }
 
             post {
