@@ -52,7 +52,9 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'docker run -d -p 47788:47788 mooh2jj/docker-jenkins-github-test'
+                sh 'docker rm -f $(docker ps -a -q -f name=docker-jenkins-github-test)'
+                sh 'docker rmi -f mooh2jj/docker-jenkins-github-test'
+                sh 'docker run --name docker-jenkins-github-test -d -p 47788:47788 mooh2jj/docker-jenkins-github-test'
             }
 
             post {
