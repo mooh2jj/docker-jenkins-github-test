@@ -35,4 +35,11 @@ public class PostController {
                 PageRequest.of(page - 1, PAGE_SIZE, Sort.by("id").descending())
         );
     }
+
+    @GetMapping("/post/{id}")
+    public Post getPostById(@PathVariable("id") Long id) {
+        return postRepositroy.findById(id).orElseThrow(
+                () -> new RuntimeException("정상적으로 실행되지 못했습니다.")
+        );
+    }
 }
