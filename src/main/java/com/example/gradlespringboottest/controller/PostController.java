@@ -42,4 +42,10 @@ public class PostController {
                 () -> new RuntimeException("정상적으로 실행되지 못했습니다.")
         );
     }
+
+    // 글 내용으로 검색 -> 해당 내용 포함한 모든 글
+    @GetMapping("/search")
+    public List<Post> findPostsByContent(@RequestParam String content) {
+        return postRepositroy.findByContentContains(content);
+    }
 }
