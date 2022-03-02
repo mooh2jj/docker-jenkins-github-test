@@ -30,6 +30,10 @@ dependencies {
     compileOnly 'mysql:mysql-connector-java'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.26'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.4.1'
+
+
 }
 
 tasks.named('test') {

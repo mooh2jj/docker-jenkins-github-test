@@ -1,7 +1,10 @@
 package com.example.gradlespringboottest.controller;
 
 import com.example.gradlespringboottest.domain.Post;
+import com.example.gradlespringboottest.rabbitmq.Producer;
 import com.example.gradlespringboottest.repository.PostRepositroy;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,11 +19,15 @@ public class PostController {
 
     private static final Integer PAGE_SIZE = 20;
 
-    public final PostRepositroy postRepositroy;
+    private final PostRepositroy postRepositroy;
+    private final Producer producer;
+    private final ObjectMapper objectMapper;
 
     @PostMapping
-    public Post createPost(@RequestBody Post post) {
-        return postRepositroy.save(post);
+    public Post createPost(@RequestBody Post post) throws JsonProcessingException {
+        String jsonPost = objectMapper.writeValueAsString(post);
+        producer.sendTo(jsonPost);
+        return post;
     }
 
 /*    @GetMapping("/posts")
